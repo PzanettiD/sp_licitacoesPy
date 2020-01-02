@@ -19,7 +19,7 @@ class Token_Invalido(Exception):
 # Função que constroi um URL para solicitação e 
 # envia-o para a API, indexando a resposta JSON
 # em um dicionário.
-def fazer_url(token, ano = 2008, quantidade = 1, offset = 0):
+def licitacao_dict(token, ano = 2008, quantidade = 1, offset = 0):
     
     '''
     Inicialmente a função formata uma solicitação para a API
@@ -52,7 +52,7 @@ def fazer_url(token, ano = 2008, quantidade = 1, offset = 0):
 
     # Confere se o ano está dentro do disponível na base de dados e se é do tipo integer.
     if type(ano) != int or ano > 2019 or ano < 2005:
-        raise ValueError('O ano deve estar entre 2005 e 2019.')
+        raise ValueError('O ano deve estar entre 2005 e 2019. E precisa ser do tipo integer (int)!')
     
     # Concatena o ano à própria url, já que o parâmetro ano é dificilmente acessado pelo GET to HTTP.
     base_url = 'https://gateway.apilib.prefeitura.sp.gov.br/sg/licitacoes/v1/' + str(ano)
@@ -61,11 +61,11 @@ def fazer_url(token, ano = 2008, quantidade = 1, offset = 0):
     # caso for maior, o request retorna o código 404, pois não há mais conteúdo JSON,
     # acho que é um bug da API.
     if type(quantidade) != int or quantidade > 10000 or quantidade <= 0:
-        raise ValueError('A quantidade deve estar entre 1 e 10000')
+        raise ValueError('A quantidade deve estar entre 1 e 10000. E precisa ser do tipo integer (int)!')
    
     # Confere se a offset está dentro do suportado pela API, igual ao anterior.
     if type(offset) != int or offset > 10000 or offset < 0:
-        raise ValueError('O valor offset deve estar entre 0 e 10000')
+        raise ValueError('O valor offset deve estar entre 0 e 10000. E precisa ser do tipo integer (int)!')
     
     # Endereça os valores finais à um dicionário, requerido para fazer a solicitação.
     parametros = {'limite': quantidade, 'offset': offset} 
@@ -87,7 +87,8 @@ def fazer_url(token, ano = 2008, quantidade = 1, offset = 0):
     # Cria um dicionário a partir do parser de JSON integrado ao 'requests'.
     resposta_dict = resposta.json() 
     
-    # Retorna uma lista de dicionários (cada dicionário é uma licitação diferente, que possuem valores,
-    # diferentes).
+    # Retorna o dicionário, que possui dois itens:
+    # resposta_dict['total'] = total de licitações do ano
+    # resposta_dict['data'] = uma lista de licitações (a quantidade é especificada pelo usuário no request).
     return resposta_dict
 
