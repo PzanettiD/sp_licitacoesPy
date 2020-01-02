@@ -70,6 +70,11 @@ def fazer_url(token, ano = 2008, quantidade = 1, offset = 0):
     # Endereça os valores finais à um dicionário, requerido para fazer a solicitação.
     parametros = {'limite': quantidade, 'offset': offset} 
    
+    # Valida os parâmetros para evitar o erro no parser de JSON quando passamos do número de licitações.
+    count_licitacoes = requests.get(base_url, headers=cabeca, params={'limite': 1, 'offset': 0}).json()['total']
+    if offset + quantidade > count_licitacoes or offset + quantidade > 10000:
+        raise ValueError('O valor offset + quantidade não pode ultrapassar o máximo de licitações.')
+    
     # Faz o pedido através do 'requests' usando o cabeçalho (header) criado e os
     # parâmetros necessários.
     resposta = requests.get(base_url, headers=cabeca, params=parametros)
@@ -84,5 +89,5 @@ def fazer_url(token, ano = 2008, quantidade = 1, offset = 0):
     
     # Retorna uma lista de dicionários (cada dicionário é uma licitação diferente, que possuem valores,
     # diferentes).
-    return resposta_dict['data']
+    return resposta_dict
 
