@@ -19,7 +19,7 @@ class Token_Invalido(Exception):
 # Função que constroi um URL para solicitação e 
 # envia-o para a API, indexando a resposta JSON
 # em um dicionário.
-def fazer_dict(token, ano = 2008, quantidade = 1, offset = 0):
+def resposta_json(token, ano = 2008, quantidade = 1, offset = 0):
     
     '''
     Inicialmente a função formata uma solicitação para a API
