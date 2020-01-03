@@ -96,3 +96,11 @@ def fazer_dict(token, ano = 2008, quantidade = 1, offset = 0):
     # resposta_dict['data'] = uma lista de licitações (a quantidade é especificada pelo usuário no request).
     return resposta_dict
 
+def obter_dados(token, ano = 2008, quantidade = 1, offset = 0):
+    resposta_crua = fazer_dict(token, ano, quantidade, offset)
+    impr_info = resposta_crua['data']
+    for licit in impr_info:
+        for k, v in licit.items():
+            if type(v) == str:
+                licit[k] = " ".join(v.split())
+    return impr_info
