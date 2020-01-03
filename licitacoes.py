@@ -82,8 +82,9 @@ def resposta_json(token, ano = 2008, quantidade = 1, offset = 0):
     # quando passamos do número limite de licitações disponíveis.
     count_licitacoes = prev_erro.json()['total']
     if offset + quantidade > count_licitacoes or offset + quantidade > 10000:
-        raise ValueError('O valor offset + quantidade não pode ultrapassar o máximo de licitações.')
-    
+        quantidade = count_licitacoes
+        offset = 0
+       
     # Faz o pedido através do 'requests' usando o cabeçalho (header) criado e os
     # parâmetros necessários.
     resposta = requests.get(base_url, headers=cabeca, params=parametros)
@@ -97,10 +98,12 @@ def resposta_json(token, ano = 2008, quantidade = 1, offset = 0):
     return resposta_dict
 
 def obter_dados(token, ano = 2008, quantidade = 1, offset = 0):
-    resposta_crua = fazer_dict(token, ano, quantidade, offset)
+    resposta_crua = resposta_json(token, ano, quantidade, offset)
     impr_info = resposta_crua['data']
     for licit in impr_info:
         for k, v in licit.items():
             if type(v) == str:
                 licit[k] = " ".join(v.split())
+            if k == 'Valor Contrato':
+                licit[k] = float(v.replace('.', '').replace(',', '.'))
     return impr_info
