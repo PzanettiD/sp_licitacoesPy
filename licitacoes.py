@@ -105,5 +105,8 @@ def obter_dados(token, ano = 2008, quantidade = 1, offset = 0):
             if type(v) == str:
                 licit[k] = " ".join(v.split())
             if k == 'Valor Contrato':
-                licit[k] = float(v.replace('.', '').replace(',', '.'))
+                if licit[k] == '':
+                    licit[k] = 0
+                else:
+                    licit[k] = float(v.replace('.', '').replace(',', '.'))
     return impr_info
