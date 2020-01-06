@@ -100,13 +100,24 @@ def resposta_json(token, ano = 2008, quantidade = 1, offset = 0):
 def obter_dados(token, ano = 2008, quantidade = 1, offset = 0):
     resposta_crua = resposta_json(token, ano, quantidade, offset)
     impr_info = resposta_crua['data']
+    licit_list = []
     for licit in impr_info:
+        new_licit = {}
         for k, v in licit.items():
-            if type(v) == str:
-                licit[k] = " ".join(v.split())
-            if k == 'Valor Contrato':
-                if licit[k] == '':
-                    licit[k] = 0
+            if k == 'Orgão':
+                new_licit['Órgão'] = licit[k]
+            if k == 'objeto':
+                new_licit['Objeto'] = licit[k]
+            else:
+                new_licit[" ".join(k.split())] = licit[k]
+        #new_licit = {" ".join(k.split()): v for k, v in licit.items()}
+        for j, l in new_licit.items():
+            if type(l) == str:
+                new_licit[j] = " ".join(l.split())
+            if j == 'Valor Contrato':
+                if new_licit[j] == '':
+                    new_licit[j] = 0
                 else:
-                    licit[k] = float(v.replace('.', '').replace(',', '.'))
-    return impr_info
+                    new_licit[j] = float(l.replace('.', '').replace(',', '.'))
+        licit_list.append(new_licit)
+    return licit_list
