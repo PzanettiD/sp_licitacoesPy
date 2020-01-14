@@ -97,27 +97,78 @@ def resposta_json(token, ano = 2008, quantidade = 1, offset = 0):
     # resposta_dict['data'] = uma lista de licitações (a quantidade é especificada pelo usuário no request).
     return resposta_dict
 
+# Função que a partir da resposta_json, "limpa" os dados obtidos, para
+# melhor visualização e compreensão e retorna uma lista de dicionários limpa,
+# contendo apenas os dados.
 def obter_dados(token, ano = 2008, quantidade = 1, offset = 0):
+
+    '''
+    
+    Esta função foi criada, pois a resposta json original não é muito bem formatada,
+    existem varios erros nas chaves do dicionário, e nos próprios dados. Os erros 
+    principais eram os espaços brancos, bem como alguns parâmetros duplicados.
+
+    Essencialmente, os parâmetros desta função são iguais ao da resposta_json.
+
+    '''
+    
+    # Faz uma solicitação inicial para obter os dados 'crús' da resposta json da API.
     resposta_crua = resposta_json(token, ano, quantidade, offset)
+
+    # Seleciona apenas os dados da resposta_crua (que é o que estamos interessados),
+    # em forma de lista de dicionários.
     impr_info = resposta_crua['data']
+
+    # Cria uma lista de dicionários vazia que será preenchida pelas licitações solicitadas.
     licit_list = []
+
+    # Confere os dicionários dentro da lista inicial não formatada (impr_info)
     for licit in impr_info:
+        
+        # Cria um novo dicionário vazio que irá conter os dados da licitação já formatados.
         new_licit = {}
+        
+        # Procura por erros dentro das chaves dos dicionários.
         for k, v in licit.items():
+
+            # Existem licitações que contém o parâmetro 'Orgão' e outras,
+            # 'Órgão', então aqui se universaliza os dados para 'Órgão', e
+            # adiciona ao dicionário vazio.
             if k == 'Orgão':
                 new_licit['Órgão'] = licit[k]
+
+            # Existem licitações que contém o parâmetro 'objeto' e outras, 
+            # 'Objeto', então aqui se universaliza os dados para 'Objeto', e
+            # adiciona ao dicionário vazio.
             if k == 'objeto':
                 new_licit['Objeto'] = licit[k]
+
+            # Em último caso, apaga os espaços em branco que continham nas chaves do dicionário,
+            # e adiciona ao dicionário vazio.
             else:
                 new_licit[" ".join(k.split())] = licit[k]
-        #new_licit = {" ".join(k.split()): v for k, v in licit.items()}
+        
+        # Procura por erros dentro dos valores do dicionário com as chaves já 'limpas'.
         for j, l in new_licit.items():
+
+            # Apaga os espaços em branco.
             if type(l) == str:
                 new_licit[j] = " ".join(l.split())
+
+            # Formata os valores da chave 'Valor Contrato'.
             if j == 'Valor Contrato':
+                
+                # Confere se o valor é uma str vazia e coloca como 0.
                 if new_licit[j] == '':
                     new_licit[j] = 0
+                
+                # Se não, coloca os valore como tipo float, que é melhor
+                # para a comparação na análise dos dados.
                 else:
                     new_licit[j] = float(l.replace('.', '').replace(',', '.'))
+        
+        # Ao final, adiciona o dicionário já formatado a lista de dicionários.
         licit_list.append(new_licit)
+    
+    # Retorna a lista de dicionários já limpa.
     return licit_list
