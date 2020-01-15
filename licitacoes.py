@@ -97,6 +97,7 @@ def resposta_json(token, ano = 2008, quantidade = 1, offset = 0):
     # resposta_dict['data'] = uma lista de licitações (a quantidade é especificada pelo usuário no request).
     return resposta_dict
 
+
 # Função que a partir da resposta_json, "limpa" os dados obtidos, para
 # melhor visualização e compreensão e retorna uma lista de dicionários limpa,
 # contendo apenas os dados.
