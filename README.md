@@ -24,4 +24,4 @@ Agora, é nescessário criar uma conta na [Vitrine de APIs da Cidade de São Pau
 
 Este token é necessário na verificação da solicitação para a API. Sem ele o pacote não funciona :/
 
-*** Note *** que o ***Access Token*** gerado tem um tempo limite de 3600 segundos!
+**Note** que o ***Access Token*** gerado tem um tempo limite de 3600 segundos!
