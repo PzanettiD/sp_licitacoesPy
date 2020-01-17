@@ -16,6 +16,6 @@ dados = licitacoes.obter_dados(token, ano = 2009, quantidade = 35)
 
 Para instalar, basta usar o [PyPi](https://pypi.org/):
 
-```properties
+```console
 você@máquina:$ pip install sp_licitacoesPy
 ```
