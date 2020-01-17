@@ -12,7 +12,7 @@ token = '------------' # Seu token aqui!
 dados = licitacoes.obter_dados(token, ano = 2009, quantidade = 35)
 ```
 
-## Instalação e Uso
+## Instalação
 
 Para instalar, basta usar o [PyPi](https://pypi.org/):
 
