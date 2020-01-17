@@ -1,4 +1,4 @@
-<center><h1>sp_licitacoesPy</h1></center>
+# sp_licitacoesPy
 
 ## Simples wrapper, em desenvolvimento, para [API de licitações da Prefeitura de São Paulo](https://apilib.prefeitura.sp.gov.br/store/)
 
