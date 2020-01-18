@@ -28,13 +28,15 @@ Agora, é nescessário criar uma conta na [Vitrine de APIs da Cidade de São Pau
 
 ## Uso
 
-Todas as funções nescessárias estão dentro de um único arquivo *licitacoes.py* dentro do pacote. São duas as funções mais importantes:
+Para ver este pacote em ação, confira a [pasta Exemplos](https://github.com/PzanettiD/sp_licitacoesPy/tree/master/Exemplos), onde há algumas demonstações usando o Jupyter Notebook e algumas outras ferramentas para vizualização de dados.
 
-+ resposta_json()
+Todas as funções nescessárias estão dentro de um único arquivo [licitacoes.py](https://github.com/PzanettiD/sp_licitacoesPy/blob/master/licitacoes.py) dentro do pacote. São duas as funções mais importantes:
+
++ ***resposta_json()***
 
    - Esta função constrói um URL para solicitação à API, e retorna a resposta JSON em um dicionário.
 
-+ obter_dados()
++ ***obter_dados()***
 
    - Esta função que "limpa" a resposta JSON da API, e retorna uma lista de dicionários com as licitações.
 
@@ -48,7 +50,7 @@ Todas as funções nescessárias estão dentro de um único arquivo *licitacoes.
 
 > ***Note*** que o valor quatidade + offset também não pode ser superior ao de 10.000
 
-+ **token**: é aquele gerado pela próptia Vitirine de APIs. Se este não for válido, resultará em um erro "Token_Invalido"
++ **token**: é aquele gerado pela próptia [Vitirine de APIs](https://apilib.prefeitura.sp.gov.br/store/). Se este não for válido, resultará em um erro "Token_Invalido".
 
 + **ano**: o ano da(s) licitação(ões) desejada(s), este deve estar entre 2008 e 2019. O valor padrão é o ano de 2008.
 
