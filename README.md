@@ -1,4 +1,5 @@
 # sp_licitacoesPy
+[![CodeFactor](https://www.codefactor.io/repository/github/pzanettid/sp_licitacoespy/badge)](https://www.codefactor.io/repository/github/pzanettid/sp_licitacoespy)
 
 ## Simples wrapper, em desenvolvimento, para [API de licitações da Prefeitura de São Paulo](https://apilib.prefeitura.sp.gov.br/store/)
 
