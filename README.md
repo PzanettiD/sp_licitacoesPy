@@ -1,5 +1,7 @@
 # sp_licitacoesPy
 [![CodeFactor](https://www.codefactor.io/repository/github/pzanettid/sp_licitacoespy/badge)](https://www.codefactor.io/repository/github/pzanettid/sp_licitacoespy)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PyPI version](https://badge.fury.io/py/sp-licitacoesPy.svg)](https://badge.fury.io/py/sp-licitacoesPy)
 
 ## Simples wrapper, em desenvolvimento, para [API de licitações da Prefeitura de São Paulo](https://apilib.prefeitura.sp.gov.br/store/)
 
