@@ -46,12 +46,12 @@ def resposta_json(token, ano = 2008, quantidade = 1, offset = 0):
 
     # Cria um dicionário que oferecerá os parâmetros pré definidos (do header) pela API para os requests,
     # confere se o token é do tipo str, e o concatena a o segundo parâmetro do cabeçalho.
-    if isinstance(token, str) == False:
+    if isinstance(token, str) is False:
         raise Token_Invalido(Token_Invalido.err_message2)
     cabeca = {'accept': 'application/json', 'Authorization': 'Bearer ' + token, 'content-type': 'application/json;charset=utf-8'}
 
     # Confere se o ano está dentro do disponível na base de dados e se é do tipo integer.
-    if isinstance(ano, int) == False or ano > 2019 or ano < 2005:
+    if isinstance(ano, int) is False or ano > 2019 or ano < 2005:
         raise ValueError('O ano deve estar entre 2005 e 2019. E precisa ser do tipo integer (int)!')
 
     # Concatena o ano à própria url, já que o parâmetro ano é dificilmente acessado pelo GET to HTTP.
@@ -60,11 +60,11 @@ def resposta_json(token, ano = 2008, quantidade = 1, offset = 0):
     # Confere se a quantidade está dentro do disponível na base de dados,
     # caso for maior, o request retorna o código 404, pois não há mais conteúdo JSON,
     # acho que é um bug da API.
-    if isinstance(quantidade, int) == False or quantidade > 10000 or quantidade <= 0:
+    if isinstance(quantidade, int) is False or quantidade > 10000 or quantidade <= 0:
         raise ValueError('A quantidade deve estar entre 1 e 10000. E precisa ser do tipo integer (int)!')
 
     # Confere se a offset está dentro do suportado pela API, igual ao anterior.
-    if isinstance(offset, int) == False or offset > 10000 or offset < 0:
+    if isinstance(offset, int) is False or offset > 10000 or offset < 0:
         raise ValueError('O valor offset deve estar entre 0 e 10000. E precisa ser do tipo integer (int)!')
 
     # Endereça os valores finais à um dicionário, requerido para fazer a solicitação.
